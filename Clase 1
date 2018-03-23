@@ -1,0 +1,55 @@
+Ejercicios:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    //Pedir nombre y localidad y luego mostrarlo:
+
+    char nombre[20];
+    char localidad[20];
+
+    printf("Ingrese su nombre: ");
+    //scanf("%s",nombre);
+    gets(nombre);
+    printf("Ingrese su localidad: ");
+    scanf("%s",localidad);
+
+    printf("Usted se llama %s y vive en la localidad de %s\n\n",nombre,localidad);
+}
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int numeroDos;
+    int numeroUno;
+    float resultado;
+
+    printf("Ingresar el primer numero:");
+    scanf("%d",&numeroUno);
+
+    printf("Ingresar el segundo numero: ");
+    scanf("%d",&numeroDos);
+
+    if (numeroUno>numeroDos){
+        if (numeroDos!=0){
+            resultado = (float)numeroUno/numeroDos;
+            printf("%.2f",resultado);
+        }else{
+                printf("No se puede dividir por cero");
+            }
+    }else if (numeroDos>numeroUno){
+                resultado = numeroUno+numeroDos;
+                printf("%.2f",resultado);
+        }else{
+            printf("%d%d",numeroUno,numeroDos);
+        }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------
+
