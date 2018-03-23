@@ -53,3 +53,43 @@ int main()
 
 ---------------------------------------------------------------------------------------------------------------------------------
 
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int nota;
+    printf("Ingresar la nota: ");
+    scanf("%d",&nota);
+
+    switch (nota){
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                printf("La proxima se puede.");
+                break;
+            case 4:
+            case 5:
+            case 6:
+                if(nota<5){
+                    printf("Raspando. Debes preocuparte mas.");
+                }else{
+                    printf("Raspando");
+                }
+                break;
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                if(nota>8){
+                    printf("Aprobó. Muy bien.");
+                }else{
+                    printf("Aprobó");
+                }
+                break;
+            default:
+                printf("La nota no es valida!");
+    }
+
+}
