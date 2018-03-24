@@ -93,3 +93,106 @@ int main()
     }
 
 }
+
+---------------------------------------------------------------------------------------------------------------------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <ctype.h>
+
+int main()
+{
+    int nota;
+    int edad;
+    char sexo='m';
+    float promedio;
+    int peorNota;
+    char peorSexo;
+    int varones=0;
+    int edadJoven;
+    int notaJoven;
+    char sexoJoven;
+    int edadMujer;
+    int notaMujer;
+    int total=0;
+    bool hayMujer=false;
+
+    for (int i=0;i<5;i++){
+        //pido la nota
+        printf("Ingresar nota: ");
+        scanf("%d",&nota);
+        //valido la nota
+        while (nota<0 || nota>10){
+            printf("Error. Vuelva a igresar la nota: ");
+            scanf("%d",&nota);
+        }
+
+        //pido la edad
+        printf("Ingresar edad: ");
+        scanf("%d",&edad);
+        //valido la edad
+        while (edad<0){
+            printf("Error. Vuelva a igresar la edad: ");
+            scanf("%d",&edad);
+        }
+
+        //pido el sexo
+        printf("Ingresar sexo: ");
+        fflush(stdin);
+        scanf("%c",&sexo);
+        sexo = tolower(sexo);
+        //valido el sexo
+        while (sexo!='f' && sexo!='m'){
+            printf("Error. Vuelva a igresar el sexo: ");
+            fflush(stdin);
+            scanf("%c",&sexo);
+            sexo = tolower(sexo);
+        }
+        printf("\n");
+
+
+        if (i==0){
+            peorNota=nota;
+            peorSexo=sexo;
+            edadJoven=edad;
+            sexoJoven=sexo;
+            notaJoven=nota;
+        }
+        //total
+        total=total+nota;
+        //la peor nota y el peor sexo
+        if(nota<peorNota){
+            peorNota=nota;
+            peorSexo=sexo;
+        }
+        //cnatidad de varones mayores a 18 con mas de 6
+        if(sexo=='m' && edad>18 && nota>=6){
+            varones=varones+1;
+        }
+        //sexo y nota del mas joven
+        if(edad<edadJoven){
+            sexoJoven=sexo;
+            notaJoven=nota;
+        }
+
+        if(sexo=='f' && hayMujer==false){
+            edadMujer=edad;
+            notaMujer=nota;
+            hayMujer=true;
+        }
+
+    }
+    promedio= (float)total/5;
+
+    printf("El promedio de notas es de: %2.f", promedio);
+    printf("\nLa nota mas baja es %d y su sexo es %c ", peorNota,peorSexo);
+    printf("\nLa cantidad de varones mayores a 18 con nota mayor o igual a 6 es de: %d", varones);
+    printf("\nEl sexo del mas joven es %c y su nota es %d ", sexoJoven,notaJoven);
+    if (hayMujer){
+        printf("\nLa edad de la primer mujer ingresada es %d y su nota es %d ", edadMujer,notaMujer);
+    }else{
+        printf("\nNo se ingreso una mujer.");
+    }
+    return 0;
+}
+
