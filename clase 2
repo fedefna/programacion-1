@@ -27,3 +27,87 @@ int sumar(int num1, int num2){
 }
 
 -------------------------------------------------------------------------------------------------------------------------------------------
+//ejemplo de funcion del tipo: "No Devuelve nada y recibe algo"
+#include <stdio.h>
+#include <stdlib.h>
+
+void sumar(int num1, int num2);
+int numero1;
+int numero2;
+int resultado;
+
+int main()
+{
+    printf("Ingresar el primer numero: ");
+    scanf("%d",&numero1);
+    printf("Ingresar el segundo numero: ");
+    scanf("%d",&numero2);
+
+    sumar(numero1,numero2);
+    return 0;
+}
+
+void sumar(int num1, int num2){
+    resultado = num1+num2;
+    printf("Resultado: %d", resultado);
+}
+-------------------------------------------------------------------------------------------------------------------------------------------
+//ejemplo de funcion del tipo: "Devuelve algo y no recibe nada"
+#include <stdio.h>
+#include <stdlib.h>
+
+int sumar();
+int resultado;
+int main()
+{
+    resultado = sumar();
+    printf("Resultado: %d", resultado);
+    return 0;
+}
+
+int sumar(){
+    int num1;
+    int num2;
+    int resultado;
+
+    printf("Ingresar el primer numero: ");
+    scanf("%d",&num1);
+    printf("Ingresar el segundo numero: ");
+    scanf("%d",&num2);
+
+    resultado = num1+num2;
+
+}
+-------------------------------------------------------------------------------------------------------------------------------------------
+//ejemplo de funcion del tipo: "no devuelve nada y no recibe nada"
+#include <stdio.h>
+#include <stdlib.h>
+
+void sumar();
+
+int main()
+{
+    sumar();
+
+    return 0;
+}
+
+void sumar(){
+    int num1;
+    int num2;
+    int resultado;
+
+    printf("Ingresar el primer numero: ");
+    scanf("%d",&num1);
+    printf("Ingresar el segundo numero: ");
+    scanf("%d",&num2);
+
+    resultado = num1+num2;
+    printf("Resultado: %d", resultado);
+}
+
+
+
+
+
+
