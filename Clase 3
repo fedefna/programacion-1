@@ -16,3 +16,27 @@ int main()
     }
     return 0;
 }
+-----------------------------------------------------------------------------------------------------------------------------------------
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int numeros[5];
+
+    printf("Ingresar 5 numeros:\n");
+    for(int i=0;i<5;i++){
+        scanf("%d",&numeros[i]);
+    }
+    printf("Los numeros son:\n");
+    for (int i=0;i<5;i++){
+        printf("%d \n",numeros[i]);
+    }
+    printf("El doble de cada numero es:\n");
+    for (int i=0;i<5;i++){
+        numeros[i]=numeros[i]*2;
+        printf("%d \n",numeros[i]);
+    }
+
+    return 0;
+}
