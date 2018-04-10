@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int buscarMaximo(int[],int);
+int buscarMinimo(int [],int);
+int buscarElemento(int [],int,int);
+void ordenarVector(int)
+
+int main()
+{
+    int vector []={8,59,221221,456,44};
+    int tam = sizeof(vector) / sizeof(vector[0]);
+
+    printf("Maximo es: %d \n",buscarMaximo(vector, tam));
+    printf("Minimo es: %d \n",buscarMinimo(vector, tam));
+    printf("La posicion del elemento es: %d \n",buscarElemento(vector, tam,59));
+
+    return 0;
+}
+
+int buscarMaximo(int vector[],int tam){
+    int maximo;
+    int flag=0;
+    for(int i=0; i<tam; i++){
+        if(vector[i]>maximo || flag==0){
+            maximo=vector[i];
+            flag=1;
+        }
+    }
+    return maximo;
+}
+
+int buscarMinimo(int vector[],int tam){
+    int minimo;
+    int flag=0;
+    for(int i=0; i<tam; i++){
+        if(vector[i]<minimo || flag==0){
+            minimo=vector[i];
+            flag=1;
+        }
+    }
+    return minimo;
+}
+
+int buscarElemento(int vector[],int tam, int elem){
+    int pos=-1;
+    for(int i=0; i<tam; i++){
+        if(elem==vector[i]){
+            pos=i;
+        }
+        return -1;
+
+    }
+}
