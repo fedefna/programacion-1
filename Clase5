@@ -52,3 +52,26 @@ int buscarElemento(int vector[],int tam, int elem){
 
     }
 }
+---------------------------------------------------------------------------------------------------------------------------------------
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int notas1[]={10,7,2,2,4};
+    int notas2[]={9,5,4,7,5};
+    float promedios[5];
+    int tam1 = sizeof(notas1) / sizeof(notas1[0]);
+    int tam2 = sizeof(notas2) / sizeof(notas2[0]);
+    int tamPro = sizeof(promedios) / sizeof(promedios[0]);
+
+    for(int i=0; i<tam1; i++){
+        promedios[i]=(float)(notas1[i]+notas2[i])/2;
+    }
+
+    for(int i=0; i<tamPro; i++){
+        printf("%.2f \n",promedios[i]);
+    }
+
+    return 0;
+}
