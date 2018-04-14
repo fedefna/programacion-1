@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void mostrarNombre(char vector[]);
+void mostrarNombres( char matriz[][20], int tam);
+
+int main()
+{
+    char nombres[5][20];
+
+    for (int i=0; i<5; i++){
+        printf("ingresar nombre numero %d:",i);
+        gets(nombres[i]);
+    }
+    mostrarNombres(nombres,5);
+
+    return 0;
+}
+
+void mostrarNombres( char matriz[][20], int tam){
+     for (int i=0; i<tam; i++){
+        mostrarNombre(matriz[i]);
+    }
+}
+
+void mostrarNombre(char vector[]){
+    //for (int i=0; i<5; i++){
+        printf("Nombre: %s.\n",vector);
+    //}
+}
