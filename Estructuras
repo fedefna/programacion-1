@@ -15,19 +15,24 @@ typedef struct {
     fechaIngreso fechaIngreso;
 }Empleado;
 
- void mostrarEmpleado(Empleado);
- Empleado crearEmpleado();
+void mostrarEmpleado(Empleado);
+Empleado crearEmpleado();
+void mostrarEmpleados(Empleado plantel[],int tam);
 
 int main()
 {
-    Empleado empleadoUno = {1234,"Juan",26000.60,'m'};
-    Empleado empleadoDos;
+    Empleado plantel[] = {{1234,"Juan",26000.60,'m',{03,03,1998}},{5678,"Sofia",27000.70,'f',{04,04,1999}},{9,"Diego",28000.80,'m',{05,05,2000}}};
 
-    empleadoDos = crearEmpleado();
+//    empleadoDos = crearEmpleado();
 
-    mostrarEmpleado(empleadoDos);
+    mostrarEmpleados(plantel,3);
 
     return 0;
+}
+void mostrarEmpleados(Empleado plantel[],int tam){
+    for(int i=0; i<tam; i++){
+        mostrarEmpleado(plantel[i]);
+    }
 }
 
 void mostrarEmpleado(Empleado emp){
