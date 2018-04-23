@@ -1,33 +1,21 @@
+#include "funciones.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct {
-
-    char nombre[50];
-    int edad;
-    int estado;
-    int dni;
-
-}EPersona;
-
-/**
- * Obtiene el primer indice libre del array.
- * param lista: el array se pasa como parametro.
- */
-int ObtenerEspacioLibre(EPersona lista[]);
-/**
- * Obtiene el indice que coincide con el dni pasado por parametro.
- * param lista: el array se pasa como parametro. dni: el dni a ser buscado en el array.
- */
-int BuscarPorDni(EPersona lista[], int dni);
+#include <string.h>
 
 int main()
 {
+
     char seguir='s';
     int opcion=0;
+    EPersona lista[20];
+    int pos;
 
-    while(seguir=='s')
-    {
+
+    //Inicializo los estados del array.
+    inicializarEstados(lista,20);
+
+    while(seguir=='s'){
         printf("1- Agregar persona\n");
         printf("2- Borrar persona\n");
         printf("3- Imprimir lista ordenada por  nombre\n");
@@ -39,10 +27,18 @@ int main()
         switch(opcion)
         {
             case 1:
+                pos=obtenerEspacioLibre(lista);
+                if (pos!=-1){
+                    agregarPersona(lista,pos,20);
+                }else{
+                    printf("\nNo hay lugar en la lista. Debe borrar una persona para ingresar una nueva.\n");
+                }
                 break;
             case 2:
+                borrarPersona(lista,20);
                 break;
             case 3:
+
                 break;
             case 4:
                 break;
@@ -54,3 +50,4 @@ int main()
 
     return 0;
 }
+
