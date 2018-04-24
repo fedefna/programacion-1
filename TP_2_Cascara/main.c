@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 int main()
 {
 
@@ -16,7 +17,8 @@ int main()
     inicializarEstados(lista,20);
 
     while(seguir=='s'){
-        printf("1- Agregar persona\n");
+        system("cls");
+        printf("\n1- Agregar persona\n");
         printf("2- Borrar persona\n");
         printf("3- Imprimir lista ordenada por  nombre\n");
         printf("4- Imprimir grafico de edades\n\n");
@@ -32,13 +34,15 @@ int main()
                     agregarPersona(lista,pos,20);
                 }else{
                     printf("\nNo hay lugar en la lista. Debe borrar una persona para ingresar una nueva.\n");
+                    system("pause");
                 }
                 break;
             case 2:
                 borrarPersona(lista,20);
                 break;
             case 3:
-
+                ordenarPorNombre(lista,20);
+                imprimirLista(lista,20);
                 break;
             case 4:
                 break;

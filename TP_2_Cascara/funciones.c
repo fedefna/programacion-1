@@ -1,6 +1,8 @@
 #include "funciones.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 
 void inicializarEstados(EPersona lista[], int tam){
     for(int i=0; i<tam;i++){
@@ -34,26 +36,34 @@ int buscarPorDni(EPersona lista[], int dni){
 
 void agregarPersona(EPersona lista[], int pos, int tam){
     int dni;
-    fflush(stdin);
-    printf("\nIngresar nombre: ");
-    gets(lista[pos].nombre);
-    fflush(stdin);
-    printf("\nIngresar edad: ");
-    scanf("%d",&lista[pos].edad);
-    fflush(stdin);
-    lista[pos].estado=0;
-    fflush(stdin);
+    int esta;
     printf("\nIngresar dni: ");
     scanf("%d",&dni);
     for (int i=0;i<tam;i++){
         if(lista[i].dni == dni && lista[i].estado==0){
-            printf("Ya existe una persona con ese dni.");
+            printf("\nYa existe una persona con ese dni.\n");
+            esta=0;
+            break;
+        }else{
+            esta=1;
         }
     }
-    lista[pos].dni=dni;
-    fflush(stdin);
+    if(esta==1){
+        fflush(stdin);
+        printf("\nIngresar nombre: ");
+        gets(lista[pos].nombre);
+        fflush(stdin);
+        printf("\nIngresar edad: ");
+        scanf("%d",&lista[pos].edad);
+        fflush(stdin);
+        lista[pos].estado=0;
+        fflush(stdin);
+        lista[pos].dni=dni;
+        fflush(stdin);
 
-    printf("\nLa persona ha sido ingresada.\n");
+        printf("\nLa persona ha sido ingresada.\n");
+    }
+    system("pause");
 }
 
 void borrarPersona(EPersona lista[],int tam){
@@ -70,8 +80,8 @@ void borrarPersona(EPersona lista[],int tam){
             printf("\nNo se encontro una persona con el dni ingresado.\n");
         }
     }
+    system("pause");
 }
-
 
 void ordenarPorNombre(EPersona lista[],int tam){
     EPersona aux;
@@ -87,11 +97,23 @@ void ordenarPorNombre(EPersona lista[],int tam){
 }
 
 void imprimirLista(EPersona lista[],int tam){
+    printf("%-15s%-5s%-10s\n\n", "NOMBRE", "EDAD", "DNI");
     for (int i=0;i<tam;i++){
         if(lista[i].estado==0){
-            printf("\nNombre: %s.\n",lista[i].nombre);
-            printf("\nEdad: %d.\n",lista[i].edad);
-            printf("\nDni: %d.\n",lista[i].dni);
+            printf("%-15s%-5d%-10d\n", lista[i].nombre,lista[i].edad,lista[i].dni);
         }
+    }
+    system("pause");
+}
+
+void mostrarGrafico(EPersona lista[],int tam){
+    int menores=0;
+    int intermedios=0;
+    int mayores=0;
+
+    for(int i=0;i<tam;i++){
+            if(lista[i].edad<19){
+                menores++;
+            }
     }
 }
