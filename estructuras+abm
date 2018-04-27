@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define TAM 2
+#define TAMS 5
 
 int menu();
 
@@ -18,35 +18,44 @@ typedef struct {
     char sexo;
     fechaIngreso fechaIngreso;
     int isEmpty;
+    int idSector;
 }eEmpleado;
+
+typedef struct{
+    int id;
+    char nombre[20];
+}eSector;
 
 void inicializarEmpleados(eEmpleado lista[],int tam);
 
-void mostrarEmpleado(eEmpleado);
-void mostrarEmpleados(eEmpleado lista[],int tam);
+void mostrarEmpleado(eEmpleado,eSector sectores[],int tams);
+void mostrarEmpleados(eEmpleado lista[],int tam,eSector sectores[],int tams);
 int buscarLibre(eEmpleado lista[],int tam);
 int buscarEmpleado(eEmpleado lista[],int tam,int legajo);
-void altaEmpleado(eEmpleado lista[],int tam);
-void bajaEmpleado(eEmpleado lista[],int tam);
-void modificarEmpleado(eEmpleado lista[],int tam);
+void altaEmpleado(eEmpleado lista[],int tam,eSector sectores[],int tams);
+void bajaEmpleado(eEmpleado lista[],int tam,eSector sectores[],int tams);
+void modificarEmpleado(eEmpleado lista[],int tam,eSector sectores[],int tams);
+int mostrarSectores(eSector sectores[],int tam);
 
 int main(){
     eEmpleado lista[TAM];
     inicializarEmpleados(lista,TAM);
     int salir=0;
+    eSector sectores[]= {{1,"Ventas"},{2,"Compras"},{3,"Contabilidad"},{4,"RRHH"},{5,"Sistemas"}};
+
     do{
       switch (menu()) {
         case 1:
-            altaEmpleado(lista,TAM);
+            altaEmpleado(lista,TAM,sectores,TAMS);
         break;
         case 2:
-            bajaEmpleado(lista,TAM);
+            bajaEmpleado(lista,TAM,sectores,TAMS);
         break;
         case 3:
-            modificarEmpleado(lista,TAM);
+            modificarEmpleado(lista,TAM,sectores,TAMS);
         break;
         case 4:
-            mostrarEmpleados(lista,TAM);
+            mostrarEmpleados(lista,TAM,sectores,TAMS);
         break;
         case 5:
         break;
@@ -79,20 +88,27 @@ void inicializarEmpleados(eEmpleado lista[],int tam){
     }
 }
 
-void mostrarEmpleados(eEmpleado plantel[],int tam){
+void mostrarEmpleados(eEmpleado plantel[],int tam,eSector sectores[],int tams){
     for(int i=0; i<tam; i++){
         if(plantel[i].isEmpty==0){
-            mostrarEmpleado(plantel[i]);
+            mostrarEmpleado(plantel[i],sectores,tams);
         }
     }
 }
 
-void mostrarEmpleado(eEmpleado emp){
+void mostrarEmpleado(eEmpleado emp,eSector sectores[],int tams){
     printf("\nLegajo: %d.\n",emp.legajo);
     printf("Nombre: %s.\n",emp.nombre);
     printf("Sueldo: $%.2f.\n",emp.sueldo);
     printf("Sexo: %c.\n",emp.sexo);
     printf("Fecha de ingreso: %d/%d/%d.\n",emp.fechaIngreso.dia,emp.fechaIngreso.mes,emp.fechaIngreso.anio);
+    for(int i=0;i<tams;i++){
+        if(emp.idSector==sectores[i].id){
+            printf("Sector: %s. \n",sectores[i].nombre);
+            break;
+        }
+    }
+    printf("Sector ID: %d. \n",emp.idSector);
 }
 
 int buscarLibre(eEmpleado lista[],int tam){
@@ -119,7 +135,7 @@ int buscarEmpleado(eEmpleado lista[],int tam,int legajo){
 }
 
 
-void altaEmpleado(eEmpleado lista[],int tam){
+void altaEmpleado(eEmpleado lista[],int tam,eSector sectores[],int tams){
     int leg;
     int pos = buscarLibre(lista,tam);
 
@@ -147,6 +163,7 @@ void altaEmpleado(eEmpleado lista[],int tam){
             scanf("%d %d %d",&emp.fechaIngreso.dia,&emp.fechaIngreso.mes,&emp.fechaIngreso.anio);
             fflush(stdin);
             emp.isEmpty=0;
+            emp.idSector=mostrarSectores(sectores,tams);
             lista[pos]=emp;
         }else{
             printf("\nYa existe un empleado con ese legajo.");
@@ -154,7 +171,7 @@ void altaEmpleado(eEmpleado lista[],int tam){
     }
 }
 
-void bajaEmpleado(eEmpleado lista[],int tam){
+void bajaEmpleado(eEmpleado lista[],int tam,eSector sectores[],int tams){
     int legajo;
     printf("Ingrese el legajo: ");
     scanf("%d",&legajo);
@@ -162,7 +179,7 @@ void bajaEmpleado(eEmpleado lista[],int tam){
     int esta = buscarEmpleado(lista,tam,legajo);
     if(esta!=-1){
         char respuesta;
-        mostrarEmpleado(lista[esta]);
+        mostrarEmpleado(lista[esta],sectores,tams);
         printf("Esta seguro que desea borrar al empleado? (s/n): ");
         fflush(stdin);
         scanf("%c",&respuesta);
@@ -176,14 +193,14 @@ void bajaEmpleado(eEmpleado lista[],int tam){
         printf("No existe dicho legajo.");
     }
 }
-void modificarEmpleado(eEmpleado lista[],int tam){
+void modificarEmpleado(eEmpleado lista[],int tam,eSector sectores[],int tams){
     int legajo;
     printf("\nIngrese el legajo: ");
     scanf("%d",&legajo);
 
     int esta = buscarEmpleado(lista,tam,legajo);
     if(esta!=-1){
-        mostrarEmpleado(lista[esta]);
+        mostrarEmpleado(lista[esta],sectores,tams);
         int auxSueldo;
         char respuesta;
         printf("\nIngrese el nuevo sueldo: $");
@@ -203,3 +220,16 @@ void modificarEmpleado(eEmpleado lista[],int tam){
         printf("\nNo existe dicho legajo.");
     }
 }
+
+int mostrarSectores(eSector sectores[],int tam){
+    int opcionElejida;
+    printf("\nElija un sector:");
+    for(int i=0;i<tam;i++){
+        printf("\n%s: %d.",sectores[i].nombre,sectores[i].id);
+    }
+    printf("\nOpcion:");
+    fflush(stdin);
+    scanf("%d",&opcionElejida);
+    return opcionElejida;
+}
+
