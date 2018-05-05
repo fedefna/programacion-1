@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct{
+    int legajo;
+    char nombre[20];
+}eAlumno;
+
+typedef struct{
+    int codigo;
+    char descripcion[201    ];
+}eMaterias;
+
+typedef struct{
+    int legAlumno;
+    int codMateria;
+}eInscripcion;
+
+void mostrarAlumnosConMaterias(eAlumno alumnos[],int tamA,eMaterias materias[],int tamM,eInscripcion inscripciones[],int tamI);
+void mostrarMateriasConCantAlumnos(eMaterias materias[],int tamM,eInscripcion inscripciones[],int tamI);
+void mostrarMateriasMasCursadas(eMaterias materias[],int tamM,eInscripcion inscripciones[],int tamI);
+void mostrarMateriasConAlumnos(eAlumno alumnos[],int tamA,eMaterias materias[],int tamM,eInscripcion inscripciones[],int tamI);
+
+int main()
+{
+    eAlumno alumnos[]={{1000,"Federico"},{1001,"Nicolas"},{1002,"Maximiliano"},{1003,"Iara"},{1004,"Stefania"},{1005,"Ezequiel"}};
+    eMaterias materias[]={{9000,"Matematica"},{9001,"Lengua"},{9002,"Programacion"},{9003,"Psicologia"},{9004,"Mecanica"},{9005,"Filosofia"}};
+    eInscripcion inscripciones[]={{1000,9000},{1000,9002},{1000,9005},{1001,9001},{1002,9000},{1002,9005},{1002,9004},{1003,9003},{1004,9005},{1003,9001},{1004,9002},{1005,9004},{1005,9000}};
+
+    mostrarAlumnosConMaterias(alumnos,6,materias,6,inscripciones,13);
+    mostrarMateriasConCantAlumnos(materias,6,inscripciones,13);
+    mostrarMateriasMasCursadas(materias,6,inscripciones,13);
+    mostrarMateriasConAlumnos(alumnos,6,materias,6,inscripciones,13);
+    return 0;
+}
+
+void mostrarAlumnosConMaterias(eAlumno alumnos[],int tamA,eMaterias materias[],int tamM,eInscripcion inscripciones[],int tamI){
+    printf("Lista de alumnos por materias:\n");
+    for(int i=0; i<tamA;i++){
+        printf("\n%s:\n",alumnos[i].nombre);
+        for(int j=0;j<tamI;j++){
+            if (alumnos[i].legajo==inscripciones[j].legAlumno){
+                for(int k=0;k<tamM;k++){
+                    if (inscripciones[j].codMateria==materias[k].codigo){
+                        printf("%s\n",materias[k].descripcion);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void mostrarMateriasConCantAlumnos(eMaterias materias[],int tamM,eInscripcion inscripciones[],int tamI){
+    printf("\n\nLista de materias con cantidad de alumnos:");
+    for(int i=0;i<tamM;i++){
+        int cant=0;
+        printf("\n%s:",materias[i].descripcion);
+        for(int j=0;j<tamI;j++){
+            if(materias[i].codigo==inscripciones[j].codMateria){
+                cant++;
+            }
+        }
+        if (cant>0){
+                printf("%d",cant);
+            }else{
+                printf("No hay alumnos inscriptos.");
+            }
+    }
+}
+
+void mostrarMateriasMasCursadas(eMaterias materias[],int tamM,eInscripcion inscripciones[],int tamI){
+    printf("\n\nMateria/s mas cursadas:\n");
+    int max=0;
+    for(int i=0;i<tamM;i++){
+        int cant=0;
+        for(int j=0;j<tamI;j++){
+            if(materias[i].codigo==inscripciones[j].codMateria){
+                cant++;
+            }
+        }
+        if(cant>max){
+            max=cant;
+        }
+    }
+    for(int i=0;i<tamM;i++){
+        int cant=0;
+        for(int j=0;j<tamI;j++){
+            if(materias[i].codigo==inscripciones[j].codMateria){
+                cant++;
+            }
+        }
+        if(cant==max){
+            printf("%s: %d\n",materias[i].descripcion,max);
+        }
+    }
+}
+
+void mostrarMateriasConAlumnos(eAlumno alumnos[],int tamA,eMaterias materias[],int tamM,eInscripcion inscripciones[],int tamI){
+    printf("Lista de materias con alumnos:\n");
+    for(int i=0; i<tamA;i++){
+        printf("\n%s:\n",materias[i].descripcion);
+        for(int j=0;j<tamI;j++){
+            if (materias[i].codigo==inscripciones[j].codMateria){
+                for(int k=0;k<tamM;k++){
+                    if (inscripciones[j].legAlumno==alumnos[k].legajo){
+                        printf("%s\n",alumnos[k].nombre);
+                    }
+                }
+            }
+        }
+    }
+}
