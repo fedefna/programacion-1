@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1525741246 source:d:\alaniz federico nicolas\primerparcial\funciones.c
+	"funciones.h"
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
+1525737470 d:\alaniz federico nicolas\primerparcial\funciones.h
+
+1525739392 source:d:\alaniz federico nicolas\primerparcial\main.c
+	"funciones.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
