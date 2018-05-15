@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int vec[5];
+
+    for(int i=0;i<5;i++){
+        printf("Ingresar un valor:\n");
+        scanf("%d",(vec+i));
+    }
+    for(int i=0;i<5;i++){
+        printf("Valor de pocision %d es: %d\n",i,*(vec+i));
+    }
+    return 0;
+}
