@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct{
+    int idTipo;
+    char descripcion[50];
+}eTipo;
+
+typedef struct{
+    int id;
+    char nombre[20];
+    int edad;
+    eTipo tipo;
+    int estado;
+}eMascota;
+
+void modificarEdad(eMascota* x, int edad);
+void mostrarMascotas(eMascota*x,int tam);
+void mostrarMascota(eMascota*x);
+int agregarMascota(eMascota*p);
+
+int main()
+{
+    eMascota miMascota;
+    eMascota mascota[5]={{123,"Pepe",4,{1,"Perro"},1},{124,"Manuelita",50,{2,"Tortuga"},1},{125,"Miau",8,{3,"Gato"},1}};
+    (mascota+3)->estado=0;
+    (mascota+4)->estado=0;
+
+   // mostrarMascotas(mascota,5);
+
+    if(agregarMascota(&miMascota)){
+        printf("Se agrego la mascota:\n");
+        mostrarMascota(&miMascota);
+    }
+
+    return 0;
+}
+
+void mostrarMascotas(eMascota*x,int tam){
+    for(int i=0;i<tam;i++){
+        if((x+i)->estado==1){
+            mostrarMascota(x+i);
+        }
+    }
+}
+void mostrarMascota(eMascota*x){
+    printf("%d  %s  %d  %s\n\n",x->id,x->nombre,x->edad,x->tipo.descripcion);
+}
+
+int agregarMascota(eMascota*p){
+    int ok=0;
+    if (p!=NULL){
+        printf("Ingresar id: ");
+        scanf("%d",p->id);
+
+        fflush(stdin);
+        printf("Ingresar nombre: ");
+        gets(p->nombre);
+        fflush(stdin);
+
+        printf("Ingresar edad: ");
+        scanf("%d",p->edad);
+
+        printf("Ingresar tipo: ");
+        scanf("%d",p->tipo.descripcion);
+
+        ok=1;
+    }
+    return ok;
+}
+
+
