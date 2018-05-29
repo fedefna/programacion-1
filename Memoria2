@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int* vector;
+    int* aux;
+
+    vector = (int*) malloc(sizeof(int)*5);
+    if(vector == NULL){
+        printf("No se pudo conseguir memoria.");
+        exit(1);
+    }
+
+    for(int i=0;i<5;i++){
+        printf("Ingresar numero: ");
+        scanf("%d", vector + i);
+    }
+
+    printf("Numeros ingresados:\n");
+    for(int i=0;i<5;i++){
+        printf("%d\n",*(vector+i));
+    }
+
+    printf("\n\n");
+
+    aux = (int*) realloc(vector,sizeof(int)*10);
+
+    if(aux!=NULL){
+        vector = aux;
+        printf("Se consigui agrandar el array con exito!\n");
+    }else{
+        printf("No se puede agrandar el array\n");
+    }
+
+
+    for(int i=5;i<10;i++){
+        printf("Ingresar numero: ");
+        scanf("%d", vector + i);
+    }
+
+    printf("Numeros ingresados:\n");
+    for(int i=5;i<10;i++){
+        printf("%d\n",*(vector+i));
+    }
+
+    vector = (int*)realloc(vector,6*sizeof(int));
+    printf("Achico el array a 6 elementos.\n");
+
+    printf("Numeros ingresados:\n");
+    for(int i=0;i<10;i++){
+        printf("%d\n",*(vector+i));
+    }
+
+
+
+    return 0;
+}
