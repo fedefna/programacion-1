@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int* vector;
+    int* aux;
+
+    vector = (int*) calloc(5,sizeof(int));//calloc inicializa en cero, primero le decis la cantidad de elemenots y despues el tamaño de cada elemento
+
+    if(vector == NULL){
+        printf("No se pudo conseguir memoria.");
+        exit(1);
+    }
+
+    printf("Numeros ingresados:\n");
+    for(int i=0;i<5;i++){
+        printf("%d\n",*(vector+i));
+    }
+
+
+
+
+    return 0;
+}
