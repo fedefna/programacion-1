@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int*x;
+
+    x=(int*) malloc(sizeof(int));
+
+    if(x==NULL){
+        printf("No se pudo conseguir memoria");
+        exit(1); //sirve para finalizar el programa si se enviara un 0 seria como el return 0
+    }
+
+    printf("Ingrese un numero: ");
+    scanf("%d",x);
+
+    printf("El numero ingresado es %d\n", *x);
+
+    free(x);
+
+
+    return 0;
+}
