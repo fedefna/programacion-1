@@ -1,0 +1,198 @@
+Ejercicios:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    //Pedir nombre y localidad y luego mostrarlo:
+
+    char nombre[20];
+    char localidad[20];
+
+    printf("Ingrese su nombre: ");
+    //scanf("%s",nombre);
+    gets(nombre);
+    printf("Ingrese su localidad: ");
+    scanf("%s",localidad);
+
+    printf("Usted se llama %s y vive en la localidad de %s\n\n",nombre,localidad);
+}
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int numeroDos;
+    int numeroUno;
+    float resultado;
+
+    printf("Ingresar el primer numero:");
+    scanf("%d",&numeroUno);
+
+    printf("Ingresar el segundo numero: ");
+    scanf("%d",&numeroDos);
+
+    if (numeroUno>numeroDos){
+        if (numeroDos!=0){
+            resultado = (float)numeroUno/numeroDos;
+            printf("%.2f",resultado);
+        }else{
+                printf("No se puede dividir por cero");
+            }
+    }else if (numeroDos>numeroUno){
+                resultado = numeroUno+numeroDos;
+                printf("%.2f",resultado);
+        }else{
+            printf("%d%d",numeroUno,numeroDos);
+        }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int nota;
+    printf("Ingresar la nota: ");
+    scanf("%d",&nota);
+
+    switch (nota){
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                printf("La proxima se puede.");
+                break;
+            case 4:
+            case 5:
+            case 6:
+                if(nota<5){
+                    printf("Raspando. Debes preocuparte mas.");
+                }else{
+                    printf("Raspando");
+                }
+                break;
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                if(nota>8){
+                    printf("Aprobó. Muy bien.");
+                }else{
+                    printf("Aprobó");
+                }
+                break;
+            default:
+                printf("La nota no es valida!");
+    }
+
+}
+
+---------------------------------------------------------------------------------------------------------------------------------
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <ctype.h>
+
+int main()
+{
+    int nota;
+    int edad;
+    char sexo='m';
+    float promedio;
+    int peorNota;
+    char peorSexo;
+    int varones=0;
+    int edadJoven;
+    int notaJoven;
+    char sexoJoven;
+    int edadMujer;
+    int notaMujer;
+    int total=0;
+    bool hayMujer=false;
+
+    for (int i=0;i<5;i++){
+        //pido la nota
+        printf("Ingresar nota: ");
+        scanf("%d",&nota);
+        //valido la nota
+        while (nota<0 || nota>10){
+            printf("Error. Vuelva a igresar la nota: ");
+            scanf("%d",&nota);
+        }
+
+        //pido la edad
+        printf("Ingresar edad: ");
+        scanf("%d",&edad);
+        //valido la edad
+        while (edad<0){
+            printf("Error. Vuelva a igresar la edad: ");
+            scanf("%d",&edad);
+        }
+
+        //pido el sexo
+        printf("Ingresar sexo: ");
+        fflush(stdin);
+        scanf("%c",&sexo);
+        sexo = tolower(sexo);
+        //valido el sexo
+        while (sexo!='f' && sexo!='m'){
+            printf("Error. Vuelva a igresar el sexo: ");
+            fflush(stdin);
+            scanf("%c",&sexo);
+            sexo = tolower(sexo);
+        }
+        printf("\n");
+
+
+        if (i==0){
+            peorNota=nota;
+            peorSexo=sexo;
+            edadJoven=edad;
+            sexoJoven=sexo;
+            notaJoven=nota;
+        }
+        //total
+        total=total+nota;
+        //la peor nota y el peor sexo
+        if(nota<peorNota){
+            peorNota=nota;
+            peorSexo=sexo;
+        }
+        //cnatidad de varones mayores a 18 con mas de 6
+        if(sexo=='m' && edad>18 && nota>=6){
+            varones=varones+1;
+        }
+        //sexo y nota del mas joven
+        if(edad<edadJoven){
+            sexoJoven=sexo;
+            notaJoven=nota;
+        }
+
+        if(sexo=='f' && hayMujer==false){
+            edadMujer=edad;
+            notaMujer=nota;
+            hayMujer=true;
+        }
+
+    }
+    promedio= (float)total/5;
+
+    printf("El promedio de notas es de: %2.f", promedio);
+    printf("\nLa nota mas baja es %d y su sexo es %c ", peorNota,peorSexo);
+    printf("\nLa cantidad de varones mayores a 18 con nota mayor o igual a 6 es de: %d", varones);
+    printf("\nEl sexo del mas joven es %c y su nota es %d ", sexoJoven,notaJoven);
+    if (hayMujer){
+        printf("\nLa edad de la primer mujer ingresada es %d y su nota es %d ", edadMujer,notaMujer);
+    }else{
+        printf("\nNo se ingreso una mujer.");
+    }
+    return 0;
+}
+
